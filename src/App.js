@@ -1,7 +1,15 @@
-import Pregunta, {useState} from "./components/Pregunta";
+
+import Pregunta from "./components/Pregunta";
+import Formulario from "./components/Formulario";
+import { useState } from "react";
 import './index.css'
 
 function App() {
+
+  //Definir State
+  const [ presupuesto, guardarPresupuesto ] = useState(0);
+  const [ restante, guardarRestante ] = useState(0);
+  
 
   return (
     <div className = 'container'>
@@ -9,8 +17,21 @@ function App() {
         <h1>Gasto Semanal</h1>
         <div className = "contenido-principal contenido">
           <Pregunta
+            guardarPresupuesto = {guardarPresupuesto}
+            guardarRestante = {guardarRestante}
 
           />
+        <div className = 'row'>
+         
+          <div className = 'one-half column'>
+            <Formulario/>
+          </div>
+
+          <div className = 'one-half column'>
+            DOS
+          </div>
+
+        </div>
         </div>
       </header>
    </div>
