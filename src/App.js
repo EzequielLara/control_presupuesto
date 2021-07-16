@@ -1,12 +1,17 @@
-import Pregunta from "./components/Pregunta";
+import Pregunta, {useState} from "./components/Pregunta";
 import './index.css'
 
 function App() {
+
   return (
-    <div className = 'header'>
+    <div className = 'container'>
       <header>
         <h1>Gasto Semanal</h1>
-        <Pregunta/>
+        <div className = "contenido-principal contenido">
+          <Pregunta
+
+          />
+        </div>
       </header>
    </div>
   );
