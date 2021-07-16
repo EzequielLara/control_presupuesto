@@ -1,9 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Error from './Error';
+import shortid from 'shortid';
 
-const Formulario = () => {
+const Formulario = ({agregarNuevoGasto}) => {
+
+    const [nombre, guardarNombre] = useState('');
+    const [cantidad, guardarCantidad] = useState(0);
+    const [error, guardarError] = useState(false);
+
+    //cuando el usuario agrega un gasto
+    const agregaGasto = e =>{
+        e.preventDefault()
+        //validar
+       if(cantidad < 1 || isNaN(cantidad) || nombre.trim() === '' ){
+       
+            guardarError(true);
+        
+        }else{
+            
+            guardarError(false);
+            
+        }
+
+        //construir el gasto
+        const gasto = {
+            nombre,
+            cantidad,
+            id: shortid.generate() //creamos los id instalando el paquete shorid (npm i shorid)
+        }
+
+        // pasar el gasto 
+
+        agregarNuevoGasto(gasto);
+
+        //resetear el formulario
+        guardarNombre('');
+        guardarCantidad(0);
+    }
+
+
     return (
-        <form>
+        <form
+            onSubmit = {agregaGasto}
+        >
             <h2>Agrega tus gastos</h2>
+
+            { error ? <Error mensaje = 'Los campos son obligatorios'/>: null}
 
             <div className = 'campo'>
                 <label>Nombre Gasto</label>
@@ -11,6 +53,8 @@ const Formulario = () => {
                     type = 'text'
                     className = 'u-full-width'
                     placeholder = 'Ej. Transporte'
+                    value = {nombre}
+                    onChange = { e => guardarNombre(e.target.value)} 
                 />
             </div>
 
@@ -20,13 +64,15 @@ const Formulario = () => {
                     type = 'number'
                     className = 'u-full-width'
                     placeholder = 'Ej.340'
+                    value = {cantidad}
+                    onChange = { e => guardarCantidad(parseInt(e.target.value), 10)}
                 />
             </div>
-
             <input 
                 type = 'submit'
                 className = 'button-primary u-full-width'
                 value = 'Agregar Gasto'
+                
             />
 
         </form>
