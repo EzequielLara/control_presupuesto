@@ -10,22 +10,21 @@ const Formulario = ({agregarNuevoGasto}) => {
 
     //cuando el usuario agrega un gasto
     const agregaGasto = e =>{
-        e.preventDefault()
+        e.preventDefault();
         //validar
        if(cantidad < 1 || isNaN(cantidad) || nombre.trim() === '' ){
        
             guardarError(true);
+            return;
+       }
         
-        }else{
             
-            guardarError(false);
-            
-        }
+        guardarError(false);
 
         //construir el gasto
         const gasto = {
-            nombre,
-            cantidad,
+            nombre : nombre,
+            cantidad : cantidad ,
             id: shortid.generate() //creamos los id instalando el paquete shorid (npm i shorid)
         }
 
@@ -63,7 +62,7 @@ const Formulario = ({agregarNuevoGasto}) => {
                 <input 
                     type = 'number'
                     className = 'u-full-width'
-                    placeholder = 'Ej.340'
+                    placeholder = 'Ej.340 '
                     value = {cantidad}
                     onChange = { e => guardarCantidad(parseInt(e.target.value), 10)}
                 />
