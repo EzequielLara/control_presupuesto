@@ -29,15 +29,7 @@ function App() {
       //Resetear a false
      guardarCrearGasto(false);
     }
-  },[gasto]);
-  //Cuando agregamos un nuevo gasto:
-  const agregarNuevoGasto = gasto =>{
-    
-     guardarGastos([...gastos, gasto]);
-
-   
-
-  }
+  },[gasto, creargasto, gastos, restante]);
   
 
   return (
